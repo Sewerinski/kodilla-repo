@@ -6,6 +6,7 @@ goto fail
 
 :runbrowser
 start "C:\Users\pc\Desktop\chrome.exe" http://localhost:8080/crud/v1/task/getTasks
+goto end
 
 :fail
 echo.
