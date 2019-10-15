@@ -8,6 +8,6 @@ import lombok.Getter;
 public class Mail {
     private String mailTo;
     private String subject;
-    private String message;
     private String toCc;
+    private String message;
 }

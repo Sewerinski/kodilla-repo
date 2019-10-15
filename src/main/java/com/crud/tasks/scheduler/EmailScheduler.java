@@ -20,24 +20,26 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    private static final String SUBJECT ="Tasks: Once a day email";
+    private static final String SUBJECT = "Tasks: Once a day email";
 
-    @Scheduled(fixedDelay = 10000)
+    //@Scheduled(fixedDelay = 10000)
+    @Scheduled(cron = "0 0 8-10 * * *")
     public void sendInformationEmail() {
+
         long size = taskRepository.count();
 
-        if (size > 1) {
-            simpleEmailService.send(new Mail(
-                    adminConfig.getAdminMail(),
-                    SUBJECT,
-                    "Currently in database you got: " + size + " tasks",
-                    null));
+        String taskName;
+
+        if(size == 1) {
+            taskName = " task";
         } else {
+            taskName = " tasks";
+        }
+
             simpleEmailService.send(new Mail(
                     adminConfig.getAdminMail(),
                     SUBJECT,
-                    "Currently in database you got: " + size + " task",
-                    null));
-        }
+                    null,
+                    "Currently in database you got: " + size + taskName));
     }
 }
